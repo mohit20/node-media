@@ -3,9 +3,9 @@ const Audio =  require("../models/audio");
 const Video =  require("../models/video");
 const createError = require('http-errors');
 var path = require('path')
-const storage = require('../middlewares/s3.middleware')
-const singleAudioUpload = storage.upload.single("audio");
-const singleVideoUpload = storage.upload.single("video");
+//const storage = require('../middlewares/s3.audio.middleware')
+const singleAudioUpload = require('../middlewares/s3.audio.middleware').single("audio");
+const singleVideoUpload = require('../middlewares/s3.video.middleware').single("video");//storage.upload.single("video");
 const getVideoDurationInSeconds = require('node-video-duration');
 var multer  = require('multer')
 const mm = require('music-metadata');
@@ -22,13 +22,14 @@ const sendError=(e,res)=>{
 exports.uploadAudio = async (req, res) => {
   console.log("Upload Audio Api called")
   //console.log("The file is " + req.audio)
-  
   singleAudioUpload(req,res, async function(err, data){
        if(err){
            console.log(err)
-          res.send(err);
+          res.send({"message":"Please upload an audio file"});
        }
         else{
+            if(!data)
+                res.send({"message":"Error occured while uploading"})
             //console.log(req.body, req.file)
             data = req.file;
             let filePath = data.location;
@@ -66,9 +67,11 @@ exports.uploadVideo = async (req, res) => {
   try{
     singleVideoUpload(req, res, async function(data, err){
         if(err){
-            res.send(err);
+            res.send({"message":"Please upload a video file"});
         }
             else{
+                if(!data)
+                    res.send({"message":"Error occured while uploading"})
                 data = req.file;
                 let filePath = data.location;
                 let files= filePath.split('/');

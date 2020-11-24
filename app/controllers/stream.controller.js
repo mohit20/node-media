@@ -3,14 +3,6 @@ const Audio =  require("../models/audio");
 const Video =  require("../models/video");
 const createError = require('http-errors');
 request = require('request')
-var path = require('path')
-const storage = require('../middlewares/s3.middleware')
-const singleAudioUpload = storage.upload.single("audio");
-const singleVideoUpload = storage.upload.single("video");
-const getVideoDurationInSeconds = require('node-video-duration');
-var multer  = require('multer')
-const mm = require('music-metadata');
- 
  
 //var upload1 = multer({ dest: './public/data/uploads/' })
 

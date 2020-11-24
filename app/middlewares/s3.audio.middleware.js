@@ -10,8 +10,17 @@ aws.config.update({
     secretAccessKey: process.env.AWS_SECRET_ACCESS,
     region: "ap-south-1",
 });
+
+const fileFilter = (req, file, cb) => {
+  if (file.mimetype === 'audio/mp3') {
+      cb(null, true)
+  } else {
+      cb(new Error('Invalid Mime Type, only mp3 and mp4'), false);
+  }
+}
 const s3 = new aws.S3();
 const upload = multer({
+  fileFilter,
     storage: multerS3({
       acl: "public-read",
       s3,
@@ -31,4 +40,4 @@ const upload = multer({
     }),
   });
 
-module.exports = {upload, s3};
+module.exports = upload;
