@@ -95,7 +95,7 @@ exports.streamAudio = async(req, res) =>{
 exports.streamVideo = async(req, res) =>{
   console.log("In streamVideo")
   console.log(req.query.fileName)
-  Audio.findOne({fileName:req.query.fileName}).lean().then(function(data){
+  Video.findOne({fileName:req.query.fileName}).lean().then(function(data){
     var fileUrl = data.filePath;
     var range = req.headers.range;
     if(!range)
