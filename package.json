@@ -30,6 +30,7 @@
     "multer": "^1.4.2",
     "multer-s3": "^2.9.0",
     "music-metadata": "^7.5.0",
-    "node-video-duration": "^1.0.1"
+    "node-video-duration": "^1.0.1",
+    "request": "^2.88.2"
   }
 }

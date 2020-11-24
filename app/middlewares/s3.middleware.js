@@ -5,7 +5,6 @@ const multerS3 = require('multer-s3');
 const multer = require('multer');
 
 
-
 aws.config.update({
     accessKeyId: process.env.AWS_ACCESS_KEY,
     secretAccessKey: process.env.AWS_SECRET_ACCESS,
@@ -32,16 +31,4 @@ const upload = multer({
     }),
   });
 
-
-
-/*
-var params = {
-    ACL: 'public-read',
-    Bucket: process.env.BUCKET_NAME,
-    Body: fs.createReadStream(req.file.path),
-    Key: req.file.originalname
-  };
-*/
-
-
-module.exports = upload;
+module.exports = {upload, s3};
