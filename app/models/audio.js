@@ -39,6 +39,12 @@ const audioSchema = new mongoose.Schema({
         type: Date, 
         default: Date.now 
     }
+}, {
+    writeConcern: {
+      w: 'majority',
+      j: true,
+      wtimeout: 1000
+    }
 })
 const audio = mongoose.model('audio', audioSchema)
 

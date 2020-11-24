@@ -7,7 +7,6 @@ request = require('request')
 //var upload1 = multer({ dest: './public/data/uploads/' })
 
 const sendError=(e,res)=>{
-  logIt.logIt("ERROR","Somthing went wrong!"+e);
   const err = new createError.InternalServerError();
   res.status(500).send(err);
 }

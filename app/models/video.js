@@ -20,7 +20,6 @@ const videoSchema = new mongoose.Schema({
     category: { 
         type: String,
         enum : ["FITNESS","FOOD","EXERCISE"],
-        default: "BOOKED",
         require:true
     },
     type: { 
@@ -38,6 +37,12 @@ const videoSchema = new mongoose.Schema({
     createdAt: { 
         type: Date, 
         default: Date.now 
+    }
+},  {
+    writeConcern: {
+      w: 'majority',
+      j: true,
+      wtimeout: 1000
     }
 })
 const video = mongoose.model('video', videoSchema)
